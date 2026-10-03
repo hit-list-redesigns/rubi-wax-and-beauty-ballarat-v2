@@ -94,13 +94,14 @@ p{margin:0;text-wrap:pretty}
 
 /* ---------- film strip ---------- */
 .strip{position:relative;background:var(--jet);color:var(--edge);padding:32px 0 46px;isolation:isolate;overflow:hidden}
-.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:12px;background:var(--sprocket) repeat-x 0 0/26px 12px;z-index:2}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:12px;background:var(--sprocket) repeat-x var(--sx,0px) 0/26px 12px;z-index:2}
 .strip::before{top:8px}.strip::after{bottom:8px}
 .strip__grain{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.55;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.strip__edge{position:absolute;top:22px;left:0;white-space:nowrap;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;font-stretch:87.5%;color:var(--edge);opacity:.9;z-index:2;pointer-events:none}
-.frames{list-style:none;margin:0;padding:12px var(--gutter) 0;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;position:relative;z-index:1}
+.strip__edge{position:absolute;top:22px;left:0;white-space:nowrap;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;font-stretch:87.5%;color:var(--edge);opacity:.9;z-index:2;pointer-events:none;will-change:transform}
+.strip__edge span{display:inline-block}
+.frames{list-style:none;margin:0;padding:12px var(--gutter) 0;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;position:relative;z-index:1;overscroll-behavior-x:contain}
 .frames::-webkit-scrollbar{display:none}
-.frame{flex:none;width:clamp(240px,23vw,340px);scroll-snap-align:start;margin:0}
+.frame{flex:none;width:clamp(240px,23vw,340px);margin:0}
 .frame figure{margin:0}
 .frame__img{aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#2A2626}
 .frame__img img{width:100%;height:100%;object-fit:cover}
@@ -412,8 +413,8 @@ footer.site{background:var(--jet);color:var(--edge);padding-block:52px 36px;font
     </div>
 
     <div class="strip develop on-jet" role="region" aria-label="Photos from the salon">
-      <div class="strip__edge" aria-hidden="true">RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸ EST. 2011 ▸ FREE ALL-DAY PARKING ▸ MON–FRI 9–7 · SAT 8–3 ▸ 03 5331 2802 ▸ RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸ EST. 2011 ▸ FREE ALL-DAY PARKING ▸ MON–FRI 9–7 · SAT 8–3 ▸ 03 5331 2802 ▸ RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸</div>
-      <ol class="frames" tabindex="0" aria-label="Salon photos, scroll sideways for more">
+      <div class="strip__edge" aria-hidden="true"><span>RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸ EST. 2011 ▸ FREE ALL-DAY PARKING ▸ MON–FRI 9–7 · SAT 8–3 ▸ 03 5331 2802 ▸&nbsp;</span><span>RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸ EST. 2011 ▸ FREE ALL-DAY PARKING ▸ MON–FRI 9–7 · SAT 8–3 ▸ 03 5331 2802 ▸&nbsp;</span><span>RUBI WAX + BEAUTY ▸ 426 LYDIARD ST NORTH BALLARAT ▸ EST. 2011 ▸ FREE ALL-DAY PARKING ▸ MON–FRI 9–7 · SAT 8–3 ▸ 03 5331 2802 ▸&nbsp;</span></div>
+      <ol class="frames" tabindex="0" aria-label="Salon photos. The strip moves slowly; hover, touch or focus it to stop, and scroll sideways to browse">
         <li class="frame" style="--i:0"><figure><div class="frame__img"><img src="https://irp.cdn-website.com/ffc289ca/dms3rep/multi/opt/IMG_6577-1000w.jpg" width="1000" height="1250" alt="A Rubi artist applying makeup in front of arched mirrors and globe lights"></div><figcaption><b>01</b>The makeup space</figcaption></figure></li>
         <li class="frame" style="--i:1"><figure><div class="frame__img"><img src="https://irp.cdn-website.com/ffc289ca/dms3rep/multi/opt/IMG_6698-1920w.jpg" width="1920" height="2400" alt="Close-up of a dermaplaning treatment on a client's brow line"></div><figcaption><b>02</b>Dermaplaning</figcaption></figure></li>
         <li class="frame" style="--i:2"><figure><div class="frame__img"><img src="https://irp.cdn-website.com/ffc289ca/dms3rep/multi/opt/7-woman-brown-hair-1920w.jpg" width="784" height="960" alt="A client with soft glam makeup and long brown waves" style="object-position:50% 25%"></div><figcaption><b>03</b>Makeup by Rubi</figcaption></figure></li>
@@ -756,6 +757,42 @@ footer.site{background:var(--jet);color:var(--edge);padding-block:52px 36px;font
     var s2=document.getElementById('status2');s2.dataset.open=open;s2.lastElementChild.textContent=msg+' · book online any time';
   }catch(e){}
   document.getElementById('yr').textContent=new Date().getFullYear();
+  // Film drift: the hero strip advances slowly and loops; any touch, hover, focus or scroll by the visitor takes over
+  (function(){
+    var strip=document.querySelector('.hero .strip'), el=strip&&strip.querySelector('.frames'), edge=strip&&strip.querySelector('.strip__edge');
+    if(!el)return;
+    var originals=[].slice.call(el.children), n=originals.length;
+    originals.forEach(function(li,i){var c=li.cloneNode(true);c.setAttribute('aria-hidden','true');c.style.setProperty('--i',n+i);
+      c.querySelectorAll('img').forEach(function(img){img.alt='';img.loading='lazy';});el.appendChild(c);});
+    var period=0, edgeW=0;
+    function measure(){period=el.children[n].offsetLeft-el.children[0].offsetLeft;edgeW=edge&&edge.firstElementChild?edge.firstElementChild.offsetWidth:0;}
+    function sync(){var x=el.scrollLeft;strip.style.setProperty('--sx',(-x%26).toFixed(2)+'px');
+      if(edgeW)edge.style.transform='translateX('+(-(x%edgeW)).toFixed(2)+'px)';}
+    el.addEventListener('scroll',sync,{passive:true});
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+    var SPEED=24, pos=0, last=0, raf=0, held=0, hover=false, seen=true, resumeAt=0;
+    function canRun(){return !reduce.matches&&!hover&&seen&&!document.hidden&&!el.contains(document.activeElement)&&performance.now()>=resumeAt;}
+    function tick(t){
+      raf=requestAnimationFrame(tick);
+      var dt=last?Math.min((t-last)/1000,.05):0; last=t;
+      if(!canRun()){pos=el.scrollLeft;return;}
+      if(Math.abs(el.scrollLeft-pos)>2)pos=el.scrollLeft;
+      pos+=SPEED*dt; if(period&&pos>=period)pos-=period;
+      el.scrollLeft=pos;
+    }
+    function hold(ms){resumeAt=performance.now()+ms;}
+    el.addEventListener('pointerdown',function(){hold(3500);});
+    el.addEventListener('touchstart',function(){hold(3500);},{passive:true});
+    el.addEventListener('wheel',function(){hold(3000);},{passive:true});
+    el.addEventListener('keydown',function(){hold(3000);});
+    el.addEventListener('mouseenter',function(){hover=true;});
+    el.addEventListener('mouseleave',function(){hover=false;hold(900);});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){seen=es[0].isIntersecting;}).observe(strip);
+    window.addEventListener('resize',function(){measure();sync();});
+    function start(){measure();sync();hold(reduce.matches?0:2600);if(!raf)raf=requestAnimationFrame(tick);}
+    if(document.readyState==='complete')start();else window.addEventListener('load',start);
+  })();
+
 })();
 </script>
 </body>
